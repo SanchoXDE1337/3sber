@@ -11,12 +11,15 @@ const baristaAsk = () => prompt('Что желаете?', '');
 const baristaSay = (coffee, charity) => {
     coffee = coffee.toUpperCase();
     if (Object.keys(menu).includes(coffee)) {
-        let price = menu[coffee] + parseInt(charity);
-        console.log(`Вы заказали ${coffee} и сделали пожертвование, с вас ${price}`)
+        let price = menu[coffee];
+        if (confirm("Пожертвавать бедным неграм?")) {
+            price += parseInt(charity);
+            return alert(`Вы заказали ${coffee} и сделали пожертвование, с вас ${price}`);
+        }
+        return alert(`Вы заказали ${coffee}, WHITE POWER, с вас ${price}`);
     } else {
-        console.log('Хуй');
+        alert('Хуй');
     }
-
 };
 
 const order = () => {
@@ -24,5 +27,5 @@ const order = () => {
     let coffee = baristaAsk();
     baristaSay(coffee, donation);
 };
-
-order();
+let button = document.querySelector('button');
+button.addEventListener('click', order);
